@@ -6,11 +6,12 @@ import os
 pid = "/tmp/this_app.pid"
 
 def main():
-    if not os.path.exists('{}/folder'.format(os.getcwd())):
-        os.system('mkdir {}/folder'.format(os.getcwd()))
-
+    
     # Set global variables from argparse
     t, path  = set_global(args)
+    
+    if not os.path.exists('{}/folder'.format(path)):
+        os.system('mkdir {}/folder'.format(path))
 
     # Start index    
     idx = 0
@@ -31,6 +32,8 @@ if __name__ == '__main__':
     parser.add_argument('--t', default=1, type=float)
     parser.add_argument('--path', default=os.getcwd(), type=str)
     args = vars(parser.parse_args()) 
+
+    print(args['path'])
 
     # Start the app_daemon.py as service in UNIX
 
